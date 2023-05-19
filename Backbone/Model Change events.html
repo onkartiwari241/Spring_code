@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script 
+            src =
+                  "https://code.jquery.com/jquery-2.1.3.min.js"
+                      type="text/javascript"></script>
+    <script 
+            src =
+                  "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"
+                     type="text/javascript"></script>
+    <script 
+            src =
+                  "https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"
+                      type="text/javascript"></script>
+
+</head>
+<body>
+    
+    <script>
+
+        var fmodel = Backbone.Model.extend({
+            initailize:function()
+            {
+                console.log("Model constructor");
+                this.bind("change:name",function(model){
+                    console.log("model changed");
+                })
+            }
+        });
+
+        var modObj = new fmodel();
+        modObj.set({
+            name:'Onakr Tiwari',
+            age:22,
+            company:'Engagebay Pvt. Ltd',
+            location:'Hyderabad'
+        })
+
+        var view = Backbone.View.extend({
+            model:modObj,
+            initailize:function()
+            {
+                this.render();
+            },
+            render:function()
+            {
+                this.model.on("change",function(){
+                    console.log("detected by view...")
+                })
+                console.log("this is caalled...");
+            }
+        });
+
+        var view = new view();
+    </script>
+
+</body>
+</html>
